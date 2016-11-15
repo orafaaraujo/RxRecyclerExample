@@ -24,8 +24,6 @@ import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
-
     @BindView(R.id.main_toolbar)
     Toolbar mToolbar;
 
@@ -44,7 +42,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setupView();
         setupRecycler();
 
-//        Snackbar.make(this, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
     }
 
     private void setupView() {
