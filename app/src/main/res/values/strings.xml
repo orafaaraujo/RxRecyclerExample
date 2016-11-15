@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">RxRecyclerExample</string>
+
+    <string name="item_number">Item %s</string>
+</resources>
