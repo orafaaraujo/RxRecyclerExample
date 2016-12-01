@@ -1,6 +1,5 @@
 package com.orafaaraujo.rxrecyclerexample.presentation.main.adapter;
 
-import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -8,6 +7,7 @@ import android.view.ViewGroup;
 import com.orafaaraujo.rxrecyclerexample.R;
 import com.orafaaraujo.rxrecyclerexample.presentation.main.MainActivity;
 import com.orafaaraujo.rxrecyclerexample.presentation.main.adapter.viewholder.LineHolder;
+import com.orafaaraujo.rxrecyclerexample.presentation.main.model.UserModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,13 +18,11 @@ import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<LineHolder> {
 
-    private final List<String> mTitles;
+    private final List<UserModel> mUsers;
 
-    private final Activity mActivity;
 
-    public RecyclerAdapter(MainActivity activity, ArrayList titles) {
-        mTitles = titles;
-        mActivity = activity;
+    public RecyclerAdapter(MainActivity activity, ArrayList users) {
+        mUsers = users;
     }
 
     @Override
@@ -35,17 +33,33 @@ public class RecyclerAdapter extends RecyclerView.Adapter<LineHolder> {
 
     @Override
     public void onBindViewHolder(LineHolder holder, int position) {
-        holder.title.setText(mTitles.get(position));
+        holder.title.setText(mUsers.get(position).getName());
+        holder.itemView.setOnClickListener(view -> {
+            updateItem(position);
+        });
     }
 
     @Override
     public int getItemCount() {
-        return mTitles != null ? mTitles.size() : 0;
+        return mUsers != null ? mUsers.size() : 0;
     }
 
-    public void updateList(Object newItem) {
-        mTitles.add(mActivity.getString(R.string.item_number, newItem));
-        notifyItemInserted(mTitles.size());
+    public void updateList(UserModel user) {
+        insertItem(user, 0);
+    }
+
+    private void insertItem(UserModel user, Integer position) {
+        mUsers.add(position, user);
+        notifyItemInserted(position);
+    }
+
+    private void updateItem(int position) {
+    }
+
+    private void removerItem(int position) {
+        mUsers.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, mUsers.size());
     }
 }
 

@@ -11,6 +11,8 @@ import android.view.View;
 
 import com.orafaaraujo.rxrecyclerexample.R;
 import com.orafaaraujo.rxrecyclerexample.presentation.main.adapter.RecyclerAdapter;
+import com.orafaaraujo.rxrecyclerexample.presentation.main.model.UserModel;
+import com.orafaaraujo.rxrecyclerexample.presentation.main.repository.UserFactory;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -49,21 +51,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mFab.setOnClickListener(this);
     }
 
+
     @Override
     public void onClick(View view) {
 
         Observable
                 .range(1, 5)
-                .zipWith(Observable.interval(200, TimeUnit.MILLISECONDS), (Func2<Integer, Long, Object>) (integer, aLong) -> integer)
+                .zipWith(Observable.interval(200, TimeUnit.MILLISECONDS),
+                        (Func2<Integer, Long, Object>) (integer, aLong) -> UserFactory.makeUser())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(o -> ((RecyclerAdapter) mRecyclerView.getAdapter()).updateList(o));
+                .subscribe(o ->
+                        ((RecyclerAdapter) mRecyclerView.getAdapter()).updateList((UserModel) o));
 
     }
 
     private void setupRecycler() {
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, linearLayoutManager.getOrientation());
+        final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this,
+                linearLayoutManager.getOrientation());
 
         mRecyclerView.addItemDecoration(dividerItemDecoration);
         mRecyclerView.setLayoutManager(linearLayoutManager);
