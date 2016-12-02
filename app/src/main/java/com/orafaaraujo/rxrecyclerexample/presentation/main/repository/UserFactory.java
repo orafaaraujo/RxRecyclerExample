@@ -14,7 +14,7 @@ public class UserFactory {
     private static String[] cities = {"Rio", "Miami", "Paris", "Montevideo", "Tokyo", "Nairobi"};
 
     public static UserModel makeUser() {
-        return new UserModel(names[getRandomValue(0, 5)], cities[getRandomValue(0, 5)], getRandomValue(0, 20));
+        return new UserModel(names[getRandomValue(0, 5)], cities[getRandomValue(0, 5)], getRandomValue(18, 50));
     }
 
     private static int getRandomValue(int low, int high) {
