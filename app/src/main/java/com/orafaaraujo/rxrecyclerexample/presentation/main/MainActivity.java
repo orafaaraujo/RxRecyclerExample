@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -35,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @BindView(R.id.main_recycler)
     RecyclerView mRecyclerView;
 
+    private RecyclerView.LayoutManager mLayoutManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
 
         Observable
-                .range(1, 5)
+                .range(1, 8)
                 .zipWith(Observable.interval(200, TimeUnit.MILLISECONDS),
                         (Func2<Integer, Long, Object>) (integer, aLong) -> UserFactory.makeUser())
                 .subscribeOn(Schedulers.newThread())
@@ -67,16 +71,67 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setupRecycler() {
-        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 
+        createList();
 
-        // Divisor entre Views!
-        final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this,
-                linearLayoutManager.getOrientation());
-        mRecyclerView.addItemDecoration(dividerItemDecoration);
-
-        mRecyclerView.setLayoutManager(linearLayoutManager);
+        mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(new RecyclerAdapter(new ArrayList<>(0)));
+    }
+
+    /**
+     * Este método irá criar um layout semelhante à uma lista.
+     */
+    private void createList() {
+
+        // Para criar um layout simples como uma lista, basta passar o Contexto.
+        mLayoutManager = new LinearLayoutManager(this);
+
+        // Divisor entre Views! Passando a orientação como paramêtro do DividerItemDecoration.
+        mRecyclerView.addItemDecoration(
+                new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+    }
+
+    /**
+     * Este método irá criar um layout de lista horizontal, onde os conteúdos ficarão lado-a-lado.
+     */
+    private void createHorizontalList() {
+
+        // Para criar um layout de uma lista.
+        mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+
+        // Divisor entre Views! Passando a orientação como paramêtro do DividerItemDecoration.
+        mRecyclerView.addItemDecoration(
+                new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL));
+    }
+
+    /**
+     * Este método irá criar um layout de Grid(como uma grade).
+     */
+    private void createGridLayoutManager() {
+
+        // Criando o GridLayoutManager com duas colunas, descritas no segundo argumento.
+        mLayoutManager = new GridLayoutManager(this, 2);
+
+        // Divisor entre views! Como é no formate de grade, precisamos dela em ambas orientações.
+        mRecyclerView.addItemDecoration(
+                new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL));
+        mRecyclerView.addItemDecoration(
+                new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+    }
+
+    /**
+     * Este método irá criar um layout de Grid, porém, as views ficarão escalonavéis, de acordo
+     * com o seu tamanho..
+     */
+    private void createStaggeredGridLayoutManager() {
+
+        // Criando o StaggeredGridLayoutManager com duas colunas, descritas no primeiro argumento
+        // e no sentido vertical (como uma lista).
+        mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+
+        // Divisor entre views.
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
     }
 
 
