@@ -68,12 +68,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setupRecycler() {
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+
+
+        // Divisor entre Views!
         final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this,
                 linearLayoutManager.getOrientation());
-
         mRecyclerView.addItemDecoration(dividerItemDecoration);
+
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        mRecyclerView.setAdapter(new RecyclerAdapter(this, new ArrayList<>(0)));
+        mRecyclerView.setAdapter(new RecyclerAdapter(new ArrayList<>(0)));
     }
 
 

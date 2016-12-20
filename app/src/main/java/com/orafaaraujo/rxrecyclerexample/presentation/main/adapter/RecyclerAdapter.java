@@ -5,12 +5,12 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.orafaaraujo.rxrecyclerexample.R;
-import com.orafaaraujo.rxrecyclerexample.presentation.main.MainActivity;
 import com.orafaaraujo.rxrecyclerexample.presentation.main.adapter.viewholder.LineHolder;
 import com.orafaaraujo.rxrecyclerexample.presentation.main.model.UserModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by rafael on 15/11/16.
@@ -20,8 +20,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<LineHolder> {
 
     private final List<UserModel> mUsers;
 
-
-    public RecyclerAdapter(MainActivity activity, ArrayList users) {
+    public RecyclerAdapter(ArrayList users) {
         mUsers = users;
     }
 
@@ -33,10 +32,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<LineHolder> {
 
     @Override
     public void onBindViewHolder(LineHolder holder, int position) {
-        holder.title.setText(mUsers.get(position).getName());
-        holder.itemView.setOnClickListener(view -> {
-            updateItem(position);
-        });
+        holder.title.setText(String.format(Locale.getDefault(), "%s, %d - %s",
+                mUsers.get(position).getName(),
+                mUsers.get(position).getAge(),
+                mUsers.get(position).getCity()
+        ));
+
+        holder.moreButton.setOnClickListener(view -> updateItem(position));
+        holder.deleteButton.setOnClickListener(view -> removerItem(position));
     }
 
     @Override
@@ -44,22 +47,24 @@ public class RecyclerAdapter extends RecyclerView.Adapter<LineHolder> {
         return mUsers != null ? mUsers.size() : 0;
     }
 
-    public void updateList(UserModel user) {
-        insertItem(user, 0);
-    }
-
-    private void insertItem(UserModel user, Integer position) {
-        mUsers.add(position, user);
-        notifyItemInserted(position);
+    private void insertItem(UserModel user) {
+        mUsers.add(user);
+        notifyItemInserted(getItemCount());
     }
 
     private void updateItem(int position) {
+        mUsers.get(position).incrementAge();
+        notifyItemChanged(position);
     }
 
     private void removerItem(int position) {
         mUsers.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, mUsers.size());
+    }
+
+    public void updateList(UserModel user) {
+        insertItem(user);
     }
 }
 

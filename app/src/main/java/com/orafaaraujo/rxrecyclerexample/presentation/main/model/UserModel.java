@@ -8,12 +8,12 @@ public class UserModel {
 
     private final String mName;
     private final String mCity;
-    private final int mPoints;
+    private int mAge;
 
-    public UserModel(String name, String city, int points) {
+    public UserModel(String name, String city, int age) {
         mName = name;
         mCity = city;
-        mPoints = points;
+        mAge = age;
     }
 
     public String getName() {
@@ -24,9 +24,11 @@ public class UserModel {
         return mCity;
     }
 
-    public int getPoints() {
-        return mPoints;
+    public int getAge() {
+        return mAge;
     }
 
-
+    public void incrementAge() {
+        mAge++;
+    }
 }
