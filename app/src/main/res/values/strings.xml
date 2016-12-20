@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RxRecyclerExample</string>
+    <string name="delete_view">Delete clicked view</string>
 </resources>
