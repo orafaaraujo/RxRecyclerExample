@@ -1,11 +1,11 @@
-package com.orafaaraujo.rxrecyclerexample.presentation.main.adapter;
+package com.orafaaraujo.rxrecyclerexample.presentation.main.presentation.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.orafaaraujo.rxrecyclerexample.R;
-import com.orafaaraujo.rxrecyclerexample.presentation.main.adapter.viewholder.LineHolder;
+import com.orafaaraujo.rxrecyclerexample.presentation.main.presentation.adapter.viewholder.LineHolder;
 import com.orafaaraujo.rxrecyclerexample.presentation.main.model.UserModel;
 
 import java.util.ArrayList;

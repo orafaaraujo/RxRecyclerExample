@@ -1,51 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.orafaaraujo.rxrecyclerexample.presentation.main.MainActivity">
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_horizontal_margin"
+    tools:context=".presentation.main.presentation.activities.MainActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <Button
+        android:id="@+id/main_button_linear_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_margin="8dp"
+        android:background="?android:selectableItemBackground"
+        android:onClick="linearVertical"
+        android:text="@string/main_button_linear_vertical"
+        android:textColor="@color/colorAccent"/>
 
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:layout_width="match_parent"
-            android:layout_height="256dp"
-            android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/main_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                app:popupTheme="@style/AppTheme.PopupOverlay"/>
-        </android.support.design.widget.CollapsingToolbarLayout>
-
-    </android.support.design.widget.AppBarLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/main_recycler"
+    <Button
+        android:id="@+id/main_button_linear_horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:visibility="visible"/>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/main_fab"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:backgroundTint="@color/colorPrimaryDark"
-        app:fabSize="normal"
-        app:srcCompat="@drawable/ic_add_white_24dp"
-        tools:ignore="VectorDrawableCompat"/>
+        android:layout_margin="8dp"
+        android:background="?android:selectableItemBackground"
+        android:onClick="horizontalVertical"
+        android:text="@string/main_button_linear_horizontal"
+        android:textColor="@color/colorAccent"/>
 
-</android.support.design.widget.CoordinatorLayout>
+    <Button
+        android:id="@+id/main_button_grid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="?android:selectableItemBackground"
+        android:onClick="grid"
+        android:text="@string/main_button_grid"
+        android:textColor="@color/colorAccent"/>
+
+    <Button
+        android:id="@+id/main_button_staggered"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="?android:selectableItemBackground"
+        android:onClick="staggredGrid"
+        android:text="@string/main_button_staggered"
+        android:textColor="@color/colorAccent"/>
+
+</LinearLayout>
