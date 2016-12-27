@@ -37,7 +37,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardHolder> {
                 mUsers.get(position).getAge(),
                 mUsers.get(position).getCity()
         ));
-
+        holder.desc.setText(mUsers.get(position).getDescription());
         holder.moreButton.setOnClickListener(view -> updateItem(position));
         holder.deleteButton.setOnClickListener(view -> removerItem(position));
     }

@@ -3,7 +3,6 @@ package com.orafaaraujo.rxrecyclerexample.presentation.main.presentation.activit
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -12,17 +11,12 @@ import android.view.View;
 import com.orafaaraujo.rxrecyclerexample.R;
 import com.orafaaraujo.rxrecyclerexample.presentation.main.model.UserModel;
 import com.orafaaraujo.rxrecyclerexample.presentation.main.presentation.adapter.CardAdapter;
-import com.orafaaraujo.rxrecyclerexample.presentation.main.repository.UserFactory;
+import com.orafaaraujo.rxrecyclerexample.presentation.main.repository.UserLoader;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func2;
-import rx.schedulers.Schedulers;
 
 public class LinearLayoutHorizontalActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -34,6 +28,8 @@ public class LinearLayoutHorizontalActivity extends AppCompatActivity implements
 
     @BindView(R.id.recycler_view_layour_recycler)
     RecyclerView mRecyclerView;
+
+    private CardAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,14 +49,9 @@ public class LinearLayoutHorizontalActivity extends AppCompatActivity implements
 
     @Override
     public void onClick(View view) {
-        Observable
-                .range(1, 8)
-                .zipWith(Observable.interval(200, TimeUnit.MILLISECONDS),
-                        (Func2<Integer, Long, Object>) (integer, aLong) -> UserFactory.makeUser())
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(o ->
-                        ((CardAdapter) mRecyclerView.getAdapter()).updateList((UserModel) o));
+        UserLoader
+                .fetch()
+                .subscribe(o -> mAdapter.updateList((UserModel) o));
     }
 
     private void setupRecycler() {
@@ -68,12 +59,10 @@ public class LinearLayoutHorizontalActivity extends AppCompatActivity implements
         // Para criar um layout de uma lista.
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-
-        // Divisor entre Views! Passando a orientação como paramêtro do DividerItemDecoration.
-        mRecyclerView.addItemDecoration(
-                new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL));
-
         mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setAdapter(new CardAdapter(new ArrayList<>(0)));
+
+        // Adiciona o adapter que irá anexar os objetos à lista.
+        mAdapter = new CardAdapter(new ArrayList<>(0));
+        mRecyclerView.setAdapter(mAdapter);
     }
 }

@@ -12,17 +12,12 @@ import android.view.View;
 import com.orafaaraujo.rxrecyclerexample.R;
 import com.orafaaraujo.rxrecyclerexample.presentation.main.model.UserModel;
 import com.orafaaraujo.rxrecyclerexample.presentation.main.presentation.adapter.LineAdapter;
-import com.orafaaraujo.rxrecyclerexample.presentation.main.repository.UserFactory;
+import com.orafaaraujo.rxrecyclerexample.presentation.main.repository.UserLoader;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func2;
-import rx.schedulers.Schedulers;
 
 public class LinearLayoutVerticalActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -34,6 +29,8 @@ public class LinearLayoutVerticalActivity extends AppCompatActivity implements V
 
     @BindView(R.id.recycler_view_layour_recycler)
     RecyclerView mRecyclerView;
+
+    private LineAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,26 +50,23 @@ public class LinearLayoutVerticalActivity extends AppCompatActivity implements V
 
     @Override
     public void onClick(View view) {
-        Observable
-                .range(1, 8)
-                .zipWith(Observable.interval(200, TimeUnit.MILLISECONDS),
-                        (Func2<Integer, Long, Object>) (integer, aLong) -> UserFactory.makeUser())
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(o ->
-                        ((LineAdapter) mRecyclerView.getAdapter()).updateList((UserModel) o));
+        UserLoader
+                .fetch()
+                .subscribe(o -> mAdapter.updateList((UserModel) o));
     }
 
     private void setupRecycler() {
 
         // Para criar um layout simples como uma lista, basta passar o Contexto.
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(layoutManager);
+
+        // Adiciona o adapter que irá anexar os objetos à lista.
+        mAdapter = new LineAdapter(new ArrayList<>(0));
+        mRecyclerView.setAdapter(mAdapter);
 
         // Divisor entre Views! Passando a orientação como paramêtro do DividerItemDecoration.
         mRecyclerView.addItemDecoration(
                 new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-
-        mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setAdapter(new LineAdapter(new ArrayList<>(0)));
     }
 }

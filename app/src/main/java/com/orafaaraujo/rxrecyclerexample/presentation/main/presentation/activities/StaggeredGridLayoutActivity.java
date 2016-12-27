@@ -11,17 +11,12 @@ import android.view.View;
 import com.orafaaraujo.rxrecyclerexample.R;
 import com.orafaaraujo.rxrecyclerexample.presentation.main.model.UserModel;
 import com.orafaaraujo.rxrecyclerexample.presentation.main.presentation.adapter.CardAdapter;
-import com.orafaaraujo.rxrecyclerexample.presentation.main.repository.UserFactory;
+import com.orafaaraujo.rxrecyclerexample.presentation.main.repository.UserLoader;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func2;
-import rx.schedulers.Schedulers;
 
 public class StaggeredGridLayoutActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -33,6 +28,8 @@ public class StaggeredGridLayoutActivity extends AppCompatActivity implements Vi
 
     @BindView(R.id.recycler_view_layour_recycler)
     RecyclerView mRecyclerView;
+
+    private CardAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,14 +49,9 @@ public class StaggeredGridLayoutActivity extends AppCompatActivity implements Vi
 
     @Override
     public void onClick(View view) {
-        Observable
-                .range(1, 8)
-                .zipWith(Observable.interval(200, TimeUnit.MILLISECONDS),
-                        (Func2<Integer, Long, Object>) (integer, aLong) -> UserFactory.makeUser())
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(o ->
-                        ((CardAdapter) mRecyclerView.getAdapter()).updateList((UserModel) o));
+        UserLoader
+                .fetch()
+                .subscribe(o -> mAdapter.updateList((UserModel) o));
     }
 
     private void setupRecycler() {
@@ -67,8 +59,10 @@ public class StaggeredGridLayoutActivity extends AppCompatActivity implements Vi
         // Criando o StaggeredGridLayoutManager com duas colunas, descritas no primeiro argumento
         // e no sentido vertical (como uma lista).
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-
         mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setAdapter(new CardAdapter(new ArrayList<>(0)));
+
+        // Adiciona o adapter que irá anexar os objetos à lista.
+        mAdapter = new CardAdapter(new ArrayList<>(0));
+        mRecyclerView.setAdapter(mAdapter);
     }
 }

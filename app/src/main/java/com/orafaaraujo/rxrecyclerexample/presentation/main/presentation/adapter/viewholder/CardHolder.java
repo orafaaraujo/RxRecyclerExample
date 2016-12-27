@@ -19,6 +19,9 @@ public class CardHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.main_card_title)
     public TextView title;
 
+    @BindView(R.id.main_card_desc)
+    public TextView desc;
+
     @BindView(R.id.main_card_more)
     public ImageButton moreButton;
 
