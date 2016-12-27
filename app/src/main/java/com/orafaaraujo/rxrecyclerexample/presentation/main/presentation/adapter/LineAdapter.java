@@ -16,11 +16,11 @@ import java.util.Locale;
  * Created by rafael on 15/11/16.
  */
 
-public class RecyclerAdapter extends RecyclerView.Adapter<LineHolder> {
+public class LineAdapter extends RecyclerView.Adapter<LineHolder> {
 
     private final List<UserModel> mUsers;
 
-    public RecyclerAdapter(ArrayList users) {
+    public LineAdapter(ArrayList users) {
         mUsers = users;
     }
 

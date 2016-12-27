@@ -11,7 +11,7 @@ import android.view.View;
 
 import com.orafaaraujo.rxrecyclerexample.R;
 import com.orafaaraujo.rxrecyclerexample.presentation.main.model.UserModel;
-import com.orafaaraujo.rxrecyclerexample.presentation.main.presentation.adapter.RecyclerAdapter;
+import com.orafaaraujo.rxrecyclerexample.presentation.main.presentation.adapter.CardAdapter;
 import com.orafaaraujo.rxrecyclerexample.presentation.main.repository.UserFactory;
 
 import java.util.ArrayList;
@@ -60,7 +60,7 @@ public class LinearLayoutHorizontalActivity extends AppCompatActivity implements
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(o ->
-                        ((RecyclerAdapter) mRecyclerView.getAdapter()).updateList((UserModel) o));
+                        ((CardAdapter) mRecyclerView.getAdapter()).updateList((UserModel) o));
     }
 
     private void setupRecycler() {
@@ -74,6 +74,6 @@ public class LinearLayoutHorizontalActivity extends AppCompatActivity implements
                 new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL));
 
         mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setAdapter(new RecyclerAdapter(new ArrayList<>(0)));
+        mRecyclerView.setAdapter(new CardAdapter(new ArrayList<>(0)));
     }
 }

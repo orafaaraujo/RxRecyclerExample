@@ -3,7 +3,6 @@ package com.orafaaraujo.rxrecyclerexample.presentation.main.presentation.activit
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -11,7 +10,7 @@ import android.view.View;
 
 import com.orafaaraujo.rxrecyclerexample.R;
 import com.orafaaraujo.rxrecyclerexample.presentation.main.model.UserModel;
-import com.orafaaraujo.rxrecyclerexample.presentation.main.presentation.adapter.RecyclerAdapter;
+import com.orafaaraujo.rxrecyclerexample.presentation.main.presentation.adapter.CardAdapter;
 import com.orafaaraujo.rxrecyclerexample.presentation.main.repository.UserFactory;
 
 import java.util.ArrayList;
@@ -60,7 +59,7 @@ public class StaggeredGridLayoutActivity extends AppCompatActivity implements Vi
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(o ->
-                        ((RecyclerAdapter) mRecyclerView.getAdapter()).updateList((UserModel) o));
+                        ((CardAdapter) mRecyclerView.getAdapter()).updateList((UserModel) o));
     }
 
     private void setupRecycler() {
@@ -69,11 +68,7 @@ public class StaggeredGridLayoutActivity extends AppCompatActivity implements Vi
         // e no sentido vertical (como uma lista).
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
 
-        // Divisor entre views.
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL));
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-
         mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setAdapter(new RecyclerAdapter(new ArrayList<>(0)));
+        mRecyclerView.setAdapter(new CardAdapter(new ArrayList<>(0)));
     }
 }
