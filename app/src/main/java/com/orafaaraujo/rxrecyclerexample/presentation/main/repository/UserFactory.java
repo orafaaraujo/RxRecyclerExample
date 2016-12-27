@@ -12,7 +12,8 @@ public class UserFactory {
 
     private static String[] names = {"Alan", "Arthur", "Nicolas", "Angela", "Brenda", "Liz"};
     private static String[] cities = {"Rio", "Miami", "Paris", "Montevideo", "Tokyo", "Nairobi"};
-    private static String[] desc = {"\"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\"",
+    private static String[] desc = {"\"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n " +
+            "Etiam eget ligula eu lectus lobortis condimentum.\n Aliquam nonummy auctor massa.\"",
             "\"Quis custodiet ipsos custodes?\""};
 
     public static UserModel makeUser() {
