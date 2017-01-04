@@ -11,8 +11,7 @@
         android:id="@+id/recycler_view_layour_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/main_line_view"
-        tools:visibility="visible"/>
+        tools:listitem="@layout/main_line_view"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/recycler_view_layour_fab"
