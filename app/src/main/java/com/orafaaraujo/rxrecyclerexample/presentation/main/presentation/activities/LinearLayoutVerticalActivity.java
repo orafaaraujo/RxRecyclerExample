@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.orafaaraujo.rxrecyclerexample.R;
@@ -21,9 +20,6 @@ import butterknife.ButterKnife;
 
 public class LinearLayoutVerticalActivity extends AppCompatActivity implements View.OnClickListener {
 
-    @BindView(R.id.recycler_view_layour_toolbar)
-    Toolbar mToolbar;
-
     @BindView(R.id.recycler_view_layour_fab)
     FloatingActionButton mFab;
 
@@ -35,7 +31,7 @@ public class LinearLayoutVerticalActivity extends AppCompatActivity implements V
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recycler_view_layour);
+        setContentView(R.layout.activity_recycler_view_vertical);
 
         ButterKnife.bind(this);
 
@@ -44,7 +40,6 @@ public class LinearLayoutVerticalActivity extends AppCompatActivity implements V
     }
 
     private void setupView() {
-        setSupportActionBar(mToolbar);
         mFab.setOnClickListener(this);
     }
 

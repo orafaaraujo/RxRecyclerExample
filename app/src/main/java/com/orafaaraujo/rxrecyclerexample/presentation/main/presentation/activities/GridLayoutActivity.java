@@ -34,7 +34,7 @@ public class GridLayoutActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recycler_view_layour);
+        setContentView(R.layout.activity_recycler_view_layout);
 
         ButterKnife.bind(this);
 

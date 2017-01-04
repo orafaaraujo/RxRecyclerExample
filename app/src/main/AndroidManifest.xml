@@ -20,7 +20,8 @@
         </activity>
 
         <activity
-            android:name=".presentation.main.presentation.activities.LinearLayoutVerticalActivity"/>
+            android:name=".presentation.main.presentation.activities.LinearLayoutVerticalActivity"
+            android:theme="@style/AppTheme"/>
 
         <activity
             android:name=".presentation.main.presentation.activities.LinearLayoutHorizontalActivity"/>
