@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class LinearLayoutVerticalActivity extends AppCompatActivity implements View.OnClickListener {
+public class LinearLayoutActivity extends AppCompatActivity implements View.OnClickListener {
 
     @BindView(R.id.recycler_view_layour_fab)
     FloatingActionButton mFab;
@@ -31,7 +31,7 @@ public class LinearLayoutVerticalActivity extends AppCompatActivity implements V
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recycler_view_vertical);
+        setContentView(R.layout.activity_linear_layout);
 
         ButterKnife.bind(this);
 
@@ -52,15 +52,16 @@ public class LinearLayoutVerticalActivity extends AppCompatActivity implements V
 
     private void setupRecycler() {
 
-        // Para criar um layout simples como uma lista, basta passar o Contexto.
+        // Configurando o gerenciador de layout para ser uma lista.
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
 
         // Adiciona o adapter que irá anexar os objetos à lista.
+        // Está sendo criado com lista vazia, pois será preenchida posteriormente.
         mAdapter = new LineAdapter(new ArrayList<>(0));
         mRecyclerView.setAdapter(mAdapter);
 
-        // Divisor entre Views! Passando a orientação como paramêtro do DividerItemDecoration.
+        // Configurando um dividr entre linhas, para uma melhor visualização.
         mRecyclerView.addItemDecoration(
                 new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
     }

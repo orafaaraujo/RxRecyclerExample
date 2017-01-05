@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void linearVertical(View view) {
-        startActivity(new Intent(this, LinearLayoutVerticalActivity.class));
+        startActivity(new Intent(this, LinearLayoutActivity.class));
     }
 
     public void horizontalVertical(View view) {
