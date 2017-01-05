@@ -47,16 +47,19 @@ public class LineAdapter extends RecyclerView.Adapter<LineHolder> {
         return mUsers != null ? mUsers.size() : 0;
     }
 
+    // Método responsável por inserir um novo usuário na lista já existente.
     private void insertItem(UserModel user) {
         mUsers.add(user);
         notifyItemInserted(getItemCount());
     }
 
+    // Método responsável por atualizar um usuário já existente na lista.
     private void updateItem(int position) {
         mUsers.get(position).incrementAge();
         notifyItemChanged(position);
     }
 
+    // Método responsável por remover um usuário da lista.
     private void removerItem(int position) {
         mUsers.remove(position);
         notifyItemRemoved(position);
