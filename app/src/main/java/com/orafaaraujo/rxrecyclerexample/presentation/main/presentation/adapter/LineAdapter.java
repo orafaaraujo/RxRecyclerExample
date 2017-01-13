@@ -5,8 +5,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.orafaaraujo.rxrecyclerexample.R;
-import com.orafaaraujo.rxrecyclerexample.presentation.main.presentation.adapter.viewholder.LineHolder;
 import com.orafaaraujo.rxrecyclerexample.presentation.main.model.UserModel;
+import com.orafaaraujo.rxrecyclerexample.presentation.main.presentation.adapter.viewholder.LineHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +49,7 @@ public class LineAdapter extends RecyclerView.Adapter<LineHolder> {
 
     /**
      * Método publico chamado para atualziar a lista.
+     *
      * @param user Novo objeto que será incluido na lista.
      */
     public void updateList(UserModel user) {
@@ -72,7 +73,7 @@ public class LineAdapter extends RecyclerView.Adapter<LineHolder> {
     private void removerItem(int position) {
         mUsers.remove(position);
         notifyItemRemoved(position);
-//        notifyItemRangeChanged(position, mUsers.size());
+        notifyItemRangeChanged(position, mUsers.size());
     }
 }
 
