@@ -3,9 +3,4 @@
     <string name="app_name">RxRecyclerExample</string>
     <string name="delete_view">Delete clicked view</string>
     <string name="more_view">Increment clicked view</string>
-
-    <string name="main_button_linear_vertical" translatable="false">Vertical list</string>
-    <string name="main_button_linear_horizontal" translatable="false">Horizontal list</string>
-    <string name="main_button_grid" translatable="false">Grid</string>
-    <string name="main_button_staggered" translatable="false">Staggered Grid</string>
 </resources>

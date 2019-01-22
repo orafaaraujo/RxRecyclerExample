@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
@@ -26,7 +25,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="8dp"
                 android:textStyle="bold"
-                tools:text="Line 1"/>
+                tools:text="Line 1" />
 
             <TextView
                 android:id="@+id/main_card_desc"
@@ -37,7 +36,7 @@
                 android:gravity="center"
                 android:textColor="@color/colorPrimaryDark"
                 android:textStyle="italic"
-                tools:text="Quis custodiet ipsos custodes?"/>
+                tools:text="Quis custodiet ipsos custodes?" />
 
             <ImageButton
                 android:id="@+id/main_card_more"
@@ -48,18 +47,18 @@
                 android:background="?selectableItemBackground"
                 android:contentDescription="@string/more_view"
                 android:padding="8dp"
-                android:src="@drawable/ic_add_black_24dp"/>
+                android:src="@drawable/ic_add_black_24dp" />
 
             <ImageButton
                 android:id="@id/main_card_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
                 android:layout_below="@id/main_card_desc"
+                android:layout_alignParentEnd="true"
                 android:background="?selectableItemBackground"
                 android:contentDescription="@string/delete_view"
                 android:padding="8dp"
-                android:src="@drawable/ic_delete_black_24dp"/>
+                android:src="@drawable/ic_delete_black_24dp" />
 
 
         </RelativeLayout>
