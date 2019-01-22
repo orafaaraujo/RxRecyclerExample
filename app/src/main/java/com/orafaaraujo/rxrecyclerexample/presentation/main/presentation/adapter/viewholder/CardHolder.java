@@ -1,12 +1,12 @@
 package com.orafaaraujo.rxrecyclerexample.presentation.main.presentation.adapter.viewholder;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.orafaaraujo.rxrecyclerexample.R;
 
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

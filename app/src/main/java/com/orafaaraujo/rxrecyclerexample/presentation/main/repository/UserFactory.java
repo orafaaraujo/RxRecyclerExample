@@ -8,7 +8,7 @@ import java.util.Random;
  * Created by rafael on 01/12/16.
  */
 
-public class UserFactory {
+class UserFactory {
 
     private static String[] names = {"Alan", "Arthur", "Nicolas", "Angela", "Brenda", "Liz"};
     private static String[] cities = {"Rio", "Miami", "Paris", "Montevideo", "Tokyo", "Nairobi"};
@@ -16,7 +16,7 @@ public class UserFactory {
             "Etiam eget ligula eu lectus lobortis condimentum.\n Aliquam nonummy auctor massa.\"",
             "\"Quis custodiet ipsos custodes?\""};
 
-    public static UserModel makeUser() {
+    static UserModel makeUser() {
         return new UserModel(names[getRandomValue(0, 5)],
                 cities[getRandomValue(0, 5)],
                 desc[getRandomValue(0, 2)],

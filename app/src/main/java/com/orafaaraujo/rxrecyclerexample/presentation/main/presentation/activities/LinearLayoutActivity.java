@@ -1,13 +1,10 @@
 package com.orafaaraujo.rxrecyclerexample.presentation.main.presentation.activities;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.orafaaraujo.rxrecyclerexample.R;
 import com.orafaaraujo.rxrecyclerexample.presentation.main.model.UserModel;
 import com.orafaaraujo.rxrecyclerexample.presentation.main.presentation.adapter.LineAdapter;
@@ -15,6 +12,10 @@ import com.orafaaraujo.rxrecyclerexample.presentation.main.repository.UserLoader
 
 import java.util.ArrayList;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -43,6 +44,7 @@ public class LinearLayoutActivity extends AppCompatActivity implements View.OnCl
         mFab.setOnClickListener(this);
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public void onClick(View view) {
         UserLoader

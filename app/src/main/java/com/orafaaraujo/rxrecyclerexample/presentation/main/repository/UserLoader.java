@@ -2,10 +2,10 @@ package com.orafaaraujo.rxrecyclerexample.presentation.main.repository;
 
 import java.util.concurrent.TimeUnit;
 
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func2;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.BiFunction;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by rafael on 27/12/16.
@@ -17,7 +17,8 @@ public class UserLoader {
         return Observable
                 .range(1, 8)
                 .zipWith(Observable.interval(200, TimeUnit.MILLISECONDS),
-                        (Func2<Integer, Long, Object>) (integer, aLong) -> UserFactory.makeUser())
+                        (BiFunction<Integer, Long, Object>) (integer, aLong) ->
+                                UserFactory.makeUser())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread());
 

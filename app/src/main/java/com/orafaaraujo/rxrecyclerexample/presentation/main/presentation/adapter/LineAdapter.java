@@ -1,6 +1,5 @@
 package com.orafaaraujo.rxrecyclerexample.presentation.main.presentation.adapter;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -8,9 +7,13 @@ import com.orafaaraujo.rxrecyclerexample.R;
 import com.orafaaraujo.rxrecyclerexample.presentation.main.model.UserModel;
 import com.orafaaraujo.rxrecyclerexample.presentation.main.presentation.adapter.viewholder.LineHolder;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by rafael on 15/11/16.
@@ -24,6 +27,7 @@ public class LineAdapter extends RecyclerView.Adapter<LineHolder> {
         mUsers = users;
     }
 
+    @NotNull
     @Override
     public LineHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new LineHolder(LayoutInflater.from(parent.getContext())
